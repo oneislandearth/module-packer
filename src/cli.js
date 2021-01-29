@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 // Import the spawn process
-import { spawnSync } from 'child_process';
+import { spawnSync, spawn } from 'child_process';
 
 // Import the filesystem module
 import { resourcePath } from './filesystem';
@@ -10,9 +10,11 @@ import { resourcePath } from './filesystem';
 if (process.argv.length < 3) {
   
     // Log the usage options for the CLI
+    console.log();
     console.log('\x1b[0m\x1b[35m\x1b[1m@oneisland/module-packer\x1b[0m\n');
     console.log('\x1b[35m    build \x1b[2m[webpack-cli-flags]\x1b[0m');
     console.log('\x1b[2m    (package up a libary or module using webpack)\x1b[0m');
+    console.log();
 
     // Exit the application
     process.exit(0);
@@ -22,8 +24,10 @@ if (process.argv.length < 3) {
 const [,, command, ...flags] = process.argv;
 
 // Build the module using webpack and the configuration
-const build = (flags) => spawnSync('webpack', ['build', '-c', resourcePath('webpack/config.js'), ...flags], {
+const build = (flags) => spawn('webpack', ['build', '-c', resourcePath('webpack/config.js'), ...flags], {
   stdio: 'inherit'
+}).on('error', (error) => {
+  console.log(error);
 });
 
 // Define the commands set

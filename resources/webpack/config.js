@@ -8,7 +8,10 @@ module.exports = (env) => {
   let configuration = {};
 
   // Define the project root directory
-  const [, projectDirectory] = /(.*)(?:node_modules\/@oneisland\/module-packer)/.exec(__dirname);
+  const projectDirectory = process.cwd();
+
+  // // Define the project root directory
+  // const [, projectDirectory] = /(.*)(?:node_modules\/@oneisland\/module-packer)/.exec(__dirname);
 
   // Check for a webpack.config.js file in the package root and load if found
   if (existsSync(`${projectDirectory}/webpack.config.js`)) configuration = require(`${projectDirectory}/webpack.config.js`);
