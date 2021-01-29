@@ -1,0 +1,48 @@
+#!/bin/bash
+
+# Stash the project directory
+PROJECT=$PWD/$1
+
+echo $PROJECT
+
+# Remove any existing package links
+rm -rf package &> /dev/null
+
+# Build the source of this package
+npm run build
+
+# Pack the library with npm
+npm pack --silent  &> /dev/null
+
+# Extract the package archive
+tar -xf *module-packer-*.tgz
+
+# Delete the package archive
+rm *module-packer-*.tgz &> /dev/null
+
+# Create the directories for the package in the linked project
+mkdir $PROJECT/node_modules &> /dev/null
+mkdir $PROJECT/node_modules/@oneisland/ &> /dev/null
+mkdir $PROJECT/node_modules/@oneisland/module-packer &> /dev/null
+
+# Copy the files to the node_modules directory in the project
+cp -rlf package/* $PROJECT/node_modules/@oneisland/module-packer
+# &> /dev/null
+
+# Delete the extracted package files
+rm -rf package &> /dev/null
+
+# Open up the package in the project directory
+cd $PROJECT/node_modules/@oneisland/module-packer
+
+# Install the package dependencies
+npm run postinstall
+
+# Open the project directory
+cd $PROJECT
+
+# Run the build script
+npm run build
+
+# Execute the bundle
+npm run test

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Build the production code
+npm run build
