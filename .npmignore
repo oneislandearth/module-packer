@@ -1,0 +1,4 @@
+# Ignore development files
+.travis.yml
+src
+webpack.config.js
