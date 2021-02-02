@@ -1,0 +1,30 @@
+{
+  "name": "@oneisland/$MODULE",
+  "private": true,
+  "version": "0.0.1",
+  "description": "A module configured with @oneisland/module-packer",
+  "keywords": [],
+  "main": "lib/bundle.js",
+  "scripts": {
+    "prepare": "npm run build",
+    "build": "module-packer build",
+    "serve": "module-packer serve",
+    "watch": "module-packer watch"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@oneisland/module-packer": "^$VERSION"
+  },
+  "homepage": "https://github.com/oneislandearth/$MODULE#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oneislandearth/$MODULE.git"
+  },
+  "bugs": {
+    "url": "https://github.com/oneislandearth/$MODULE/issues"
+  },
+  "contributors": [
+    "Daniel Larkin <daniel@oneisland.io>"
+  ],
+  "license": "MIT"
+}

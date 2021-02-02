@@ -8,13 +8,17 @@
     "modules",
     "webpack"
   ],
-  "main": "lib/bundle.js",
+  "main": "lib/cli.js",
   "bin": {
     "module-packer": "lib/cli.js"
   },
   "scripts": {
     "build": "webpack build",
-    "postinstall": ""
+    "prepare": "webpack build",
+    "postinstall": "lib/cli.js postinstall",
+    "prepublish": "npm run build",
+    "serve": "module-packer serve",
+    "watch": "module-packer watch"
   },
   "dependencies": {
     "webpack": "^5.18.0",

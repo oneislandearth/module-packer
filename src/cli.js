@@ -1,10 +1,13 @@
 #!/usr/bin/env node
 
-// Import the spawn process
-import { spawnSync, spawn } from 'child_process';
+// Import the webpack module
+import { build, serve, watch } from './webpack';
 
-// Import the filesystem module
-import { resourcePath } from './filesystem';
+// Import the postinstall module
+import { postinstall } from './postinstall';
+
+// Import the init module
+import { init } from './init';
 
 // Handle when there aren't any arguments
 if (process.argv.length < 3) {
@@ -12,8 +15,14 @@ if (process.argv.length < 3) {
     // Log the usage options for the CLI
     console.log();
     console.log('\x1b[0m\x1b[35m\x1b[1m@oneisland/module-packer\x1b[0m\n');
+    console.log('\x1b[35m    init \x1b[2m[name]\x1b[0m');
+    console.log('\x1b[2m    (setup a new library or module)\x1b[0m\n');
     console.log('\x1b[35m    build \x1b[2m[webpack-cli-flags]\x1b[0m');
-    console.log('\x1b[2m    (package up a libary or module using webpack)\x1b[0m');
+    console.log('\x1b[2m    (package up a library or module using webpack)\x1b[0m\n');
+    console.log('\x1b[35m    watch \x1b[2m[webpack-cli-flags]\x1b[0m');
+    console.log('\x1b[2m    (package up and watch for library or module changes using webpack -w)\x1b[0m\n');
+    console.log('\x1b[35m    serve \x1b[2m[webpack-cli-flags]\x1b[0m');
+    console.log('\x1b[2m    (package up and serve a library or module using webpack serve)\x1b[0m\n');
     console.log();
 
     // Exit the application
@@ -23,15 +32,8 @@ if (process.argv.length < 3) {
 // Extract the command and arguments
 const [,, command, ...flags] = process.argv;
 
-// Build the module using webpack and the configuration
-const build = (flags) => spawn('webpack', ['build', '-c', resourcePath('webpack/config.js'), ...flags], {
-  stdio: 'inherit'
-}).on('error', (error) => {
-  console.log(error);
-});
-
 // Define the commands set
-const commands = { build };
+const commands = { build, serve, watch, postinstall, init };
 
 // Run the appropriate command
 commands[command](flags);

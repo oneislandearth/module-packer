@@ -39,7 +39,7 @@ cd $PROJECT/node_modules/@oneisland/module-packer
 npm run postinstall
 
 # Open the project directory
-cd $PROJECT
+cd $PROJECT/src
 
 # Run the build script
 npm run build
