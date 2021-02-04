@@ -32,6 +32,8 @@ class ShebangPlugin {
       }
     });
 
+    console.log(compiler.hooks.thisCompilation.target);
+
     // Handle the plugin compilation hooks
     compiler.hooks.thisCompilation.tap('ShebangPlugin', compilation => {
 

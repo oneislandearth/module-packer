@@ -26,5 +26,4 @@ yarn-error.log*
 *.sw*
 
 # Sourcemap files
-lib/*.map
-resources/*/*.map
+# lib/*.map

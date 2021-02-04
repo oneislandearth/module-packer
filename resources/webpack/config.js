@@ -53,7 +53,6 @@ module.exports = (env) => {
     configuration.output.devtoolModuleFilenameTemplate = '/[absolute-resource-path]';
   }
 
-
   // Append the module if not set
   if (!configuration.module) configuration.module = {};
 

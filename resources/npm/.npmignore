@@ -9,8 +9,3 @@ src
 
 # Sourcemap files
 lib/*.map
-resources/*/*.map
-
-# Include the dot resources (ignore MacOS files)
-!resources/*/.*
-resources/*/.DS_Store
