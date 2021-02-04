@@ -3,7 +3,7 @@ import { existsSync, readFileSync, writeFileSync, copyFileSync, symlinkSync } fr
 import { resolve } from 'path';
 
 // Define the package name
-const packageID = '@oneisland/module-packer-dev';
+const packageID = '@oneisland/module-packer';
 
 // Read a file
 export const readFile = (path) => readFileSync(path, { encoding: 'utf-8' });

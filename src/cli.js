@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/env -S node --enable-source-maps
 
 // Import the webpack module
 import { build, serve, watch } from './webpack';

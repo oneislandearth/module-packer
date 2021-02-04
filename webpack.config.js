@@ -1,3 +1,6 @@
+// Import the Sourcemap plugin
+const { SourceMapDevToolPlugin } = require('webpack');
+
 // Import the Shebang plugin
 const { ShebangPlugin } = require('./resources/webpack/shebang');
 
@@ -7,7 +10,7 @@ module.exports = {
   // Define the build environment
   mode: 'production',
   target: 'node',
-  devtool: 'source-map',
+  devtool: 'eval',
 
   // Define the modules to build and appropriate paths
   entry: {
@@ -33,9 +36,23 @@ module.exports = {
 
     // Setup the output as an umd module
     libraryTarget: 'umd',
-    scriptType: 'module'
+    scriptType: 'module',
+
+    // Setup the sourcemap paths
+    devtoolModuleFilenameTemplate: '/[absolute-resource-path]'
   },
 
-  // Load the Shebang plugin
-  plugins: [new ShebangPlugin()]
+  // Add the plugins
+  plugins: [
+    
+    // Add the Shebang plugin
+    new ShebangPlugin(),
+
+    // Add the Sourcemap plugin
+    new SourceMapDevToolPlugin({ 
+      filename: '[name].js.map',
+      exclude: /filesystem.js/ 
+    })
+  
+  ]
 };
