@@ -32,8 +32,6 @@ class ShebangPlugin {
       }
     });
 
-    console.log(compiler.hooks.thisCompilation.target);
-
     // Handle the plugin compilation hooks
     compiler.hooks.thisCompilation.tap('ShebangPlugin', compilation => {
 
@@ -48,23 +46,27 @@ class ShebangPlugin {
       });
     });
 
-    // Handle the make hook
-    compiler.hooks.make.tap('ShebangPlugin', compilation => {
-      compilation.hooks.afterProcessAssets.tap('ShebangPlugin', assets => {
-        for (const name in assets) {
-          const source = assets[name];
-          if (name in this.entries) {
-            const { shebang } = this.entries[name];
-            const rep = new ReplaceSource(source, 'shebang');
-            rep.insert(0, shebang + '\n\n', 'shebang');
-            compilation.updateAsset(name, rep);
+    // Check if the target is node
+    if (compiler.options.target == 'node') {
+      
+      // Append the shebang using the make hook
+      compiler.hooks.make.tap('ShebangPlugin', compilation => {
+        compilation.hooks.afterProcessAssets.tap('ShebangPlugin', assets => {
+          for (const name in assets) {
+            const source = assets[name];
+            if (name in this.entries) {
+              const { shebang } = this.entries[name];
+              const rep = new ReplaceSource(source, 'shebang');
+              rep.insert(0, shebang + '\n\n', 'shebang');
+              compilation.updateAsset(name, rep);
+            }
           }
-        }
+        });
       });
-    });
 
-    // Handle the execution permissions for the final executable module
-    compiler.hooks.assetEmitted.tap('ShebangPlugin', (file, { targetPath }) => chmodSync(targetPath, 0o755));
+      // Handle the execution permissions for the final executable module
+      compiler.hooks.assetEmitted.tap('ShebangPlugin', (file, { targetPath }) => chmodSync(targetPath, 0o755));
+    }
   }
 }
 
