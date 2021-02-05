@@ -19,7 +19,7 @@ module.exports = {
     '/resources/webpack/filesystem': `${__dirname}/src/filesystem.js`,
 
     // Define the cli module for the package
-    '/lib/cli': `${__dirname}/src/cli.js`,
+    '/lib/cli': `${__dirname}/src/cli.js`
 
     // Define the core bundle for the package
     // '/lib/bundle': `${__dirname}/src/main.js`

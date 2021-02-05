@@ -1,5 +1,5 @@
 // Import the filesystem module
-import { copyResource, isPackage, workspacePathExists } from './filesystem';
+import { copyResource, isPackage, linkResource, workspacePathExists } from './filesystem';
 
 // Import the package module
 import { appendScripts, initPackage, clearDependencies } from './package';
@@ -20,6 +20,13 @@ export const postinstall = () => {
   // Copy the npm files
   copyResource('npm/.npmignore', '.npmignore');
 
+  // Configure the the linter files
+  copyResource('eslint/.eslintignore', '.eslintignore');
+  linkResource('eslint/.eslintrc.js', '.eslintrc.js');
+
+  // Configure vscode
+  copyResource('vscode/jsconfig.json', 'jsconfig.json');
+
   // Check for a package.json file and append the scripts
   if (workspacePathExists('package.json')) {
 
@@ -35,4 +42,4 @@ export const postinstall = () => {
     // Clear the dependencies
     clearDependencies();
   }
-}
+};

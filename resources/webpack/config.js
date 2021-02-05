@@ -53,6 +53,18 @@ module.exports = (env) => {
     configuration.output.devtoolModuleFilenameTemplate = '/[absolute-resource-path]';
   }
 
+  // Append the resolve if not set
+  if (!configuration.resolve) configuration.resolve = {};
+
+  // Append the resolve.alias if not set
+  if (!configuration.resolve.alias) configuration.resolve.alias = {};
+
+  // Append the aliases
+  configuration.resolve.alias['Lib'] = workspacePath('lib');
+  configuration.resolve.alias['Source'] = workspacePath('src');
+  configuration.resolve.alias['Service'] = workspacePath('service/src');
+  configuration.resolve.alias['Client'] = workspacePath('client/src');
+
   // Append the module if not set
   if (!configuration.module) configuration.module = {};
 

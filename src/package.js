@@ -2,7 +2,7 @@
 import { 
   readJSON, writeJSON, readFile, writeFile, 
   workspacePath, packagePath, resourcePath,
-  workspaceDirectory, packageDirectory 
+  workspaceDirectory
 } from './filesystem';
 
 // Configure the package.json scripts
@@ -31,7 +31,7 @@ export const appendScripts = () => {
 
   // Update the package.json file
   writeJSON(workspacePath('package.json'), packageData);
-}
+};
 
 // Configure the package.json scripts
 export const initPackage = (name) => {
@@ -53,7 +53,7 @@ export const initPackage = (name) => {
 
   // Save the package.json file
   writeFile(workspacePath('package.json'), packageData);
-}
+};
 
 
 // Clear the devDependencies of the package.json when installing (postinstall)
@@ -67,4 +67,4 @@ export const clearDependencies = () => {
 
   // Update the package.json file
   writeJSON(workspacePath('package.json'), packageData);
-}
+};

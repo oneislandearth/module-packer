@@ -4,6 +4,12 @@
 # Webpack configuration
 webpack.config.js
 
+# Eslint configuration
+.eslint
+
+# Vscode configuration
+jsconfig.json
+
 # Source files
 src
 

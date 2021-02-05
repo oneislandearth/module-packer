@@ -1,0 +1,11 @@
+# Ignore all files
+*.js
+
+# Don't ignore the src files
+!src/*.js
+!src/**
+!service/src/*.js
+!service/src/**
+!client/src/*.js
+!client/src/**
+

@@ -37,7 +37,7 @@ export const findRootDirectory = (directory, namecheck) => {
 
   // Recursively search up a directory
   return findRootDirectory(resolve(directory, '../'), (namecheck) ? namecheck : null);
-}
+};
 
 // Define the workspace root directory
 export const workspaceDirectory = findRootDirectory(process.cwd(), (name) => name != packageID).replace(/node_modules.*/, '');
@@ -84,7 +84,7 @@ export const linkResource = (resource, target) => {
     // Symbolically link the resource
     symlinkSync(resourcePath(resource), workspacePath(target));
   }
-}
+};
 
 // Copy a resource file to the workspace
 export const copyResource = (resource, target) => {
@@ -95,4 +95,4 @@ export const copyResource = (resource, target) => {
     // Copy the file
     copyFileSync(resourcePath(resource), workspacePath(target));
   }
-}
+};

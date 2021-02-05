@@ -1,6 +1,3 @@
-# Symlinked .eslintrc.js
-.eslintrc*
-
 # MacOS files
 .DS_Store
 

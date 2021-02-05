@@ -4,6 +4,12 @@
 # Webpack configuration
 webpack.config.js
 
+# Eslint configuration
+.eslint
+
+# Vscode configuration
+jsconfig.json
+
 # Source files
 src
 
@@ -13,3 +19,6 @@ lib/*.map
 # Include the dot resources (ignore MacOS files)
 !resources/*/.*
 resources/*/.DS_Store
+
+# Include vscode files
+!resources/vscode/*

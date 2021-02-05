@@ -57,7 +57,7 @@ class ShebangPlugin {
             if (name in this.entries) {
               const { shebang } = this.entries[name];
               const rep = new ReplaceSource(source, 'shebang');
-              rep.insert(0, shebang + '\n\n', 'shebang');
+              rep.insert(0, `${shebang}\n\n`, 'shebang');
               compilation.updateAsset(name, rep);
             }
           }
@@ -74,4 +74,4 @@ class ShebangPlugin {
 module.exports = {
   default: loader,
   ShebangPlugin
-}
+};

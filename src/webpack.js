@@ -9,7 +9,7 @@ const [ ,,, ...flags ] = process.argv;
 const cli = executablePath('webpack');
 
 // Define the path to the webpack configuration
-const config = resourcePath('webpack/config.js')
+const config = resourcePath('webpack/config.js');
 
 // Build the module using webpack and the configuration (plus any flags)
 export const build = () => spawn(cli, 'build', '-c', config, ...flags);
