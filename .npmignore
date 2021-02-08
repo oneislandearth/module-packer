@@ -8,6 +8,7 @@ webpack.config.js
 .eslint
 
 # Vscode configuration
+.vscode
 jsconfig.json
 
 # Source files

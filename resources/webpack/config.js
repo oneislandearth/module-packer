@@ -89,6 +89,14 @@ module.exports = (env) => {
     filename: '[name].js.map' 
   }));
 
+  // Append the devServer if not set
+  if (!configuration.devServer) configuration.devServer = {};
+
+  // Append the devServer.contentBase if not set
+  if (!configuration.devServer.contentBase) configuration.devServer.contentBase = [
+    workspacePath('lib'), workspacePath('dist'), workspacePath('public')
+  ];
+
   // Return the output
   return configuration;
 };

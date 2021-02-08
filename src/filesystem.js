@@ -1,5 +1,5 @@
 // Import the filesystem and path modules
-import { existsSync, readFileSync, writeFileSync, copyFileSync, symlinkSync } from 'fs';
+import { existsSync, readFileSync, writeFileSync, copyFileSync, symlinkSync, mkdirSync } from 'fs';
 import { resolve } from 'path';
 
 // Define the package name
@@ -66,11 +66,14 @@ export const executablePath = (file) => `${modulesDirectory}/.bin/${file}`;
 // Determine the path for a resource file
 export const resourcePath = (file) => `${resourceDirectory}/${file}`;
 
+// Determine if a path exists
+export const pathExists = (path) => existsSync(path);
+
 // Determine if a file exists at the workspace path
-export const workspacePathExists = (file) => existsSync(workspacePath(file));
+export const workspacePathExists = (file) => pathExists(workspacePath(file));
 
 // Determine if a file exists at the resource path
-export const resourcePathExists = (file) => existsSync(resourcePath(file));
+export const resourcePathExists = (file) => pathExists(resourcePath(file));
 
 // Determine if the current root workspace is this package (e.g. npm link installing)
 export const isPackage = (workspaceDirectory == 'none');
@@ -95,4 +98,11 @@ export const copyResource = (resource, target) => {
     // Copy the file
     copyFileSync(resourcePath(resource), workspacePath(target));
   }
+};
+
+// Create a directory
+export const createDirectory = (path) => {
+
+  // Check if the directory already exists and creat one if not
+  if (!pathExists(path)) mkdirSync(path); 
 };

@@ -1,5 +1,5 @@
 // Import the filesystem module
-import { copyResource, isPackage, linkResource, workspacePathExists } from './filesystem';
+import { copyResource, isPackage, linkResource, workspacePathExists, workspacePath, createDirectory } from './filesystem';
 
 // Import the package module
 import { appendScripts, initPackage, clearDependencies } from './package';
@@ -25,6 +25,8 @@ export const postinstall = () => {
   linkResource('eslint/.eslintrc.js', '.eslintrc.js');
 
   // Configure vscode
+  createDirectory(workspacePath('.vscode'));
+  copyResource('vscode/settings.json', '.vscode/settings.json');
   copyResource('vscode/jsconfig.json', 'jsconfig.json');
 
   // Check for a package.json file and append the scripts

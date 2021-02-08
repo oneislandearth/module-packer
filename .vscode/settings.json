@@ -1,0 +1,16 @@
+{
+  // Editor configuration
+  "editor.tabSize": 2,
+  "editor.codeActionsOnSave": ["source.fixAll.eslint"],
+
+  // Eslint configuration
+  "eslint.format.enable": true,
+  "eslint.lintTask.enable": true,
+  "eslint.codeActionsOnSave.mode": "all",
+  "eslint.probe": ["javascript", "typescript", "vue", "html"],
+
+  // Git configuration
+  "git.confirmSync": false,
+  "git.enableSmartCommit": true,
+  "git.ignoreLimitWarning": true
+}
