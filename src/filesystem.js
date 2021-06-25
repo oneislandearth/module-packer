@@ -1,6 +1,7 @@
-// Import the filesystem and path modules
-import { existsSync, readFileSync, writeFileSync, copyFileSync, symlinkSync, mkdirSync } from 'fs';
-import { resolve } from 'path';
+// Import the os, ilesystem and path modules
+import { existsSync, readFileSync, writeFileSync, copyFileSync, symlinkSync, mkdirSync, rmdirSync, mkdtempSync } from 'fs';
+import { resolve, join } from 'path';
+import { tmpdir } from 'os';
 
 // Define the package name
 const packageID = '@oneisland/module-packer';
@@ -39,6 +40,9 @@ export const findRootDirectory = (directory, namecheck) => {
   return findRootDirectory(resolve(directory, '../'), (namecheck) ? namecheck : null);
 };
 
+// Define the temporary directory
+export const temporaryDirectory = mkdtempSync(join(tmpdir(), 'omp-'));
+
 // Define the workspace root directory
 export const workspaceDirectory = findRootDirectory(process.cwd(), (name) => name != packageID).replace(/node_modules.*/, '');
 
@@ -46,25 +50,28 @@ export const workspaceDirectory = findRootDirectory(process.cwd(), (name) => nam
 export const packageDirectory = findRootDirectory(__dirname, (name) => name == packageID);
 
 // Define the node modules directory
-export const modulesDirectory = `${packageDirectory.replace(/node_modules.*/, '')}/node_modules`;
+export const modulesDirectory = join(packageDirectory.replace(/node_modules.*/, ''), '/node_modules');
 
 // Define the package resource directory
-export const resourceDirectory = `${packageDirectory}/resources`;
+export const resourceDirectory = join(packageDirectory, '/resources');
 
-// Determine the path for a package file
-export const packagePath = (file) => `${packageDirectory}/${file}`;
+// Determine the path for a temporary file
+export const temporaryPath = (file) => join(temporaryDirectory, '/', file);
 
 // Determine the path for a workspace file
-export const workspacePath = (file) => `${workspaceDirectory}/${file}`;
+export const workspacePath = (file) => join(workspaceDirectory, '/', file);
+
+// Determine the path for a package file
+export const packagePath = (file) => join(packageDirectory, '/', file);
 
 // Determine the path for a node module
-export const modulePath = (file) => `${modulesDirectory}/${file}`;
+export const modulePath = (file) => join(modulesDirectory, '/', file);
 
 // Determine the path for a node executable
-export const executablePath = (file) => `${modulesDirectory}/.bin/${file}`;
+export const executablePath = (file) => join(modulesDirectory, '/.bin/', file);
 
 // Determine the path for a resource file
-export const resourcePath = (file) => `${resourceDirectory}/${file}`;
+export const resourcePath = (file) => join(resourceDirectory, '/', file);
 
 // Determine if a path exists
 export const pathExists = (path) => existsSync(path);
@@ -106,3 +113,9 @@ export const createDirectory = (path) => {
   // Check if the directory already exists and creat one if not
   if (!pathExists(path)) mkdirSync(path); 
 };
+
+// Remove a directory
+export const removeDirectory = (directory, recursive) => rmdirSync(directory, { recursive });
+
+// Remove the temporary directory on exit
+process.on('exit', () => removeDirectory(temporaryDirectory, true));

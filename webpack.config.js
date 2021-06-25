@@ -4,6 +4,9 @@ const { SourceMapDevToolPlugin } = require('webpack');
 // Import the Shebang plugin
 const { ShebangPlugin } = require('./resources/webpack/shebang');
 
+// Import the utilities
+const { moduleFilename } = require('./resources/webpack/utils');
+
 // Define the webpack build rules
 module.exports = {
 
@@ -16,13 +19,10 @@ module.exports = {
   entry: {
 
     // Define the filesystem script to be used by the webpack resource
-    '/resources/webpack/filesystem': `${__dirname}/src/filesystem.js`,
+    'resources/webpack/filesystem': `${__dirname}/src/filesystem.js`,
 
     // Define the cli module for the package
-    '/lib/cli': `${__dirname}/src/cli.js`
-
-    // Define the core bundle for the package
-    // '/lib/bundle': `${__dirname}/src/main.js`
+    'lib/cli': `${__dirname}/src/cli.js`
   },
 
   // Define the output rules
@@ -39,7 +39,19 @@ module.exports = {
     scriptType: 'module',
 
     // Setup the sourcemap paths
+    // devtoolModuleFilenameTemplate: moduleFilename
     devtoolModuleFilenameTemplate: '/[absolute-resource-path]'
+  },
+
+  // Add the pre source map loader
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        enforce: 'pre',
+        use: ['source-map-loader']
+      }
+    ]
   },
 
   // Add the plugins
@@ -51,8 +63,23 @@ module.exports = {
     // Add the Sourcemap plugin
     new SourceMapDevToolPlugin({ 
       filename: '[name].js.map',
+      columns: true,
+      noSources: false,
+      module: true,
       exclude: /filesystem.js/ 
     })
   
-  ]
+  ],
+
+  optimization: {
+    // providedExports: false,
+    mangleExports: false,
+    // concatenateModules: true,
+    usedExports: false,
+  },
+
+  stats: {
+    modules: false,
+    source: true,
+  }
 };

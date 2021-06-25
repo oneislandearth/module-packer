@@ -1,0 +1,8 @@
+{
+  "files": ["$HASH"],
+  "nodeArguments": [
+    "--trace-deprecation",
+    "--napi-modules",
+    "--enable-source-maps"
+  ]
+}

@@ -19,7 +19,8 @@ module.exports = {
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
-    configuration: 'readonly'
+    configuration: 'readonly',
+    test: 'readonly'
   },
   rules: {
     'accessor-pairs': 'error',
@@ -45,6 +46,7 @@ module.exports = {
       'error',
       'always',
       {
+        'ignorePattern': 'export|import|const|let|var|function|class|new|for|if|else|while',
         'ignoreConsecutiveComments': true,
         'ignoreInlineComments': true
       }
@@ -77,7 +79,7 @@ module.exports = {
     'eqeqeq': 'off',
     'func-call-spacing': 'error',
     'func-name-matching': 'error',
-    'func-names': 'error',
+    'func-names': 'off',
     'func-style': 'error',
     'function-paren-newline': 'error',
     'generator-star-spacing': 'error',
@@ -129,7 +131,7 @@ module.exports = {
     'new-parens': 'error',
     'newline-after-var': 'off',
     'newline-before-return': 'error',
-    'newline-per-chained-call': 'error',
+    'newline-per-chained-call': 'off',
     'no-alert': 'error',
     'no-array-constructor': 'error',
     'no-async-promise-executor': 'error',
@@ -149,7 +151,7 @@ module.exports = {
     'no-div-regex': 'error',
     'no-duplicate-imports': 'error',
     'no-else-return': 'error',
-    'no-empty-function': 'error',
+    'no-empty-function': 'off',
     'no-eq-null': 'error',
     'no-eval': 'error',
     'no-extend-native': 'error',
@@ -161,7 +163,7 @@ module.exports = {
     'no-implicit-globals': 'error',
     'no-implied-eval': 'error',
     'no-inline-comments': 'off',
-    'no-invalid-this': 'error',
+    'no-invalid-this': 'off',
     'no-iterator': 'error',
     'no-label-var': 'error',
     'no-labels': 'error',
@@ -213,7 +215,14 @@ module.exports = {
     'no-throw-literal': 'error',
     'no-undef-init': 'error',
     'no-undefined': 'error',
-    'no-underscore-dangle': 'error',
+    'no-underscore-dangle': [
+      'error', 
+      { 
+        'allowAfterThis': true,
+        'allowAfterSuper': true,
+        'allowAfterThisConstructor': true 
+      }
+    ],
     'no-unmodified-loop-condition': 'error',
     'no-unneeded-ternary': 'error',
     'no-unused-expressions': 'off',
@@ -297,7 +306,10 @@ module.exports = {
     ],
     'valid-jsdoc': 'error',
     'vars-on-top': 'error',
-    'wrap-iife': 'error',
+    'wrap-iife': [
+      'error', 
+      'inside'
+    ],
     'wrap-regex': 'error',
     'yield-star-spacing': 'error',
     'yoda': 'error'

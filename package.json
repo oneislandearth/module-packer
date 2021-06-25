@@ -1,7 +1,7 @@
 {
   "name": "@oneisland/module-packer",
   "private": false,
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Quick and easy packaging of libraries and modules",
   "keywords": [
     "module-packer",
@@ -17,15 +17,15 @@
     "prepare": "webpack build",
     "postinstall": "lib/cli.js postinstall",
     "prepublish": "npm run build",
-    "serve": "module-packer serve",
-    "watch": "module-packer watch"
+    "info": "module-packer"
   },
   "dependencies": {
     "@babel/eslint-parser": "^7.12.13",
+    "@oneisland/worker-module": "^0.0.2",
     "eslint": "^7.19.0",
     "eslint-plugin-vue": "^7.5.0",
     "source-map-loader": "^2.0.0",
-    "webpack": "^5.20.1",
+    "webpack": "^5.40.0",
     "webpack-cli": "^4.4.0",
     "webpack-dev-server": "^3.11.2"
   },
@@ -40,5 +40,11 @@
   "contributors": [
     "Daniel Larkin <daniel@oneisland.io>"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.13.10",
+    "@babel/core": "^7.12.16",
+    "@babel/preset-env": "^7.12.16",
+    "babel-loader": "^8.2.2"
+  }
 }

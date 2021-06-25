@@ -7,6 +7,9 @@ const { ShebangPlugin } = require('./shebang');
 // Import the filesystem module
 const { workspacePath, workspacePathExists } = require('./filesystem');
 
+// Import the utility module	
+const { moduleFilename } = require('./utils');
+
 // Define the webpack configurator
 module.exports = (env) => {
 
@@ -50,6 +53,7 @@ module.exports = (env) => {
   if (!configuration.output.devtoolModuleFilenameTemplate && configuration.target == 'node') {
 
     // Append the output.devtoolModuleFilenameTemplate 
+    // configuration.output.devtoolModuleFilenameTemplate = (info) => moduleFilename(info, workspacePath);
     configuration.output.devtoolModuleFilenameTemplate = '/[absolute-resource-path]';
   }
 
@@ -60,10 +64,10 @@ module.exports = (env) => {
   if (!configuration.resolve.alias) configuration.resolve.alias = {};
 
   // Append the aliases
-  configuration.resolve.alias['Lib'] = workspacePath('lib');
-  configuration.resolve.alias['Source'] = workspacePath('src');
-  configuration.resolve.alias['Service'] = workspacePath('service/src');
-  configuration.resolve.alias['Client'] = workspacePath('client/src');
+  configuration.resolve.alias['~lib'] = workspacePath('lib');
+  configuration.resolve.alias['~src'] = workspacePath('src');
+  configuration.resolve.alias['~service'] = workspacePath('service/src');
+  configuration.resolve.alias['~client'] = workspacePath('client/src');
 
   // Append the module if not set
   if (!configuration.module) configuration.module = {};
@@ -76,6 +80,12 @@ module.exports = (env) => {
     test: /\.js$/,
     enforce: 'pre',
     use: ['source-map-loader']
+  });
+
+  // Add the worker module loader
+  configuration.module.rules.push({
+    test: /(.*)(?:worker\.js)$/,
+    loader: '@oneisland/worker-module/loader'
   });
 
   // Append the plugins if not set

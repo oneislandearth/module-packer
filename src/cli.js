@@ -1,5 +1,7 @@
 #!/usr/bin/env -S node --enable-source-maps
 
+// Require('source-map-support').install();
+
 // Import the webpack module
 import { build, serve, watch } from './webpack';
 

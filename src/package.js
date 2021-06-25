@@ -29,6 +29,9 @@ export const appendScripts = () => {
   // Check if there is a watch script and add one if not
   if (!packageData.scripts.watch) packageData.scripts.watch = 'module-packer watch';
 
+  // Check if there is a test script and add one if not
+  if (!packageData.scripts.test) packageData.scripts.test = 'module-packer test';
+
   // Update the package.json file
   writeJSON(workspacePath('package.json'), packageData);
 };
