@@ -94,11 +94,17 @@ export const linkResource = (resource, target) => {
     // Attempt to symlink
     try {
 
+      console.log(resourcePath(resource));
+
       // Symbolically link the resource
       symlinkSync(resourcePath(resource), workspacePath(target));
     
     // Ignore the error as the file exists
-    } catch (e) {}
+    } catch (e) {
+
+      // Log the error
+      console.error(e);
+    }
   }
 };
 

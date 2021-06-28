@@ -63,9 +63,9 @@ module.exports = {
     // Add the Sourcemap plugin
     new SourceMapDevToolPlugin({ 
       filename: '[name].js.map',
-      columns: true,
-      noSources: false,
-      module: true,
+      // columns: true,
+      // noSources: false,
+      // module: true,
       exclude: /filesystem.js/ 
     })
   

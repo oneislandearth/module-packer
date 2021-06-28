@@ -31,8 +31,15 @@ module.exports = (env) => {
   // Append the devtool if not set
   if (!configuration.devtool) configuration.devtool = 'eval';
 
-  // Append the entry mode if not set
-  if (!configuration.entry) configuration.entry = { 'bundle': workspacePath('src/main.js') };
+  // Check if the entry file is unset
+  if (!configuration.entry) {
+
+    // Define the entry file
+    const file = (workspacePathExists('src/main.js')) ? workspacePath('src/main.js') : workspacePath('src/index.js');
+    
+    // Append the entry mode if not set
+    configuration.entry = { 'bundle': file };
+  }
 
   // Append the output if not set
   if (!configuration.output) configuration.output = {};
@@ -104,7 +111,11 @@ module.exports = (env) => {
 
   // Append the devServer.contentBase if not set
   if (!configuration.devServer.contentBase) configuration.devServer.contentBase = [
-    workspacePath('lib'), workspacePath('dist'), workspacePath('public')
+    workspacePath('lib'), 
+    workspacePath('dist'), 
+    workspacePath('public'),
+    workspacePath('client/public'), 
+    workspacePath('service/public')
   ];
 
   // Return the output
