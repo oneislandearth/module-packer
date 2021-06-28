@@ -77,7 +77,7 @@ module.exports = (env) => {
 
   // Add the source map loader
   configuration.module.rules.push({
-    test: /\.js$/,
+    test: /src[\//].*.js$/,
     enforce: 'pre',
     use: ['source-map-loader']
   });

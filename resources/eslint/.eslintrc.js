@@ -152,6 +152,7 @@ module.exports = {
     'no-duplicate-imports': 'error',
     'no-else-return': 'error',
     'no-empty-function': 'off',
+    'no-empty': 'off',
     'no-eq-null': 'error',
     'no-eval': 'error',
     'no-extend-native': 'error',

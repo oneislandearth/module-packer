@@ -5,6 +5,9 @@
 // Import the webpack module
 import { build, serve, watch } from './webpack';
 
+// Import the ava module
+import { test } from './ava';
+
 // Import the postinstall module
 import { postinstall } from './postinstall';
 
@@ -25,6 +28,8 @@ if (process.argv.length < 3) {
   console.log('\x1b[2m    (package up and watch for library or module changes using webpack -w)\x1b[0m\n');
   console.log('\x1b[35m    serve \x1b[2m[webpack-cli-flags]\x1b[0m');
   console.log('\x1b[2m    (package up and serve a library or module using webpack serve)\x1b[0m\n');
+  console.log('\x1b[35m    test \x1b[2m[ava-flags]\x1b[0m');
+  console.log('\x1b[2m    (execute any tests defined in the libary or module using ava)\x1b[0m\n');
   console.log();
 
   // Exit the application
@@ -35,7 +40,7 @@ if (process.argv.length < 3) {
 const [,, command, ...flags] = process.argv;
 
 // Define the commands set
-const commands = { build, serve, watch, postinstall, init };
+const commands = { build, serve, watch, test, postinstall, init };
 
 // Run the appropriate command
 commands[command](flags);

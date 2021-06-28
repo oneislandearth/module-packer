@@ -29,6 +29,9 @@ export const postinstall = () => {
   copyResource('vscode/settings.json', '.vscode/settings.json');
   copyResource('vscode/jsconfig.json', 'jsconfig.json');
 
+  // Configure ava
+  copyResource('ava/ava.config.json', 'ava.config.json');
+
   // Check for a package.json file and append the scripts
   if (workspacePathExists('package.json')) {
 

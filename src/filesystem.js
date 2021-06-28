@@ -91,8 +91,14 @@ export const linkResource = (resource, target) => {
   // Check that there is a resource to be linked and there is no file at the target
   if (resourcePathExists(resource) && !workspacePathExists(target)) {
 
-    // Symbolically link the resource
-    symlinkSync(resourcePath(resource), workspacePath(target));
+    // Attempt to symlink
+    try {
+
+      // Symbolically link the resource
+      symlinkSync(resourcePath(resource), workspacePath(target));
+    
+    // Ignore the error as the file exists
+    } catch (e) {}
   }
 };
 

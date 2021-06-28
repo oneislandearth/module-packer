@@ -1,5 +1,12 @@
 {
-  "files": ["$HASH"],
+  "files": [
+    "tests/*.js",
+    "tests/**/*.js",
+    "client/tests/*.js",
+    "client/tests/**/*.js",
+    "service/tests/*.js",
+    "service/tests/**/*.js"
+  ],
   "nodeArguments": [
     "--trace-deprecation",
     "--napi-modules",

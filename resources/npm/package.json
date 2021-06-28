@@ -9,7 +9,8 @@
     "prepare": "npm run build",
     "build": "module-packer build",
     "serve": "module-packer serve",
-    "watch": "module-packer watch"
+    "watch": "module-packer watch",
+    "test": "module-packer test"
   },
   "dependencies": {},
   "devDependencies": {
