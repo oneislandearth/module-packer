@@ -118,6 +118,12 @@ module.exports = (env) => {
     workspacePath('service/public')
   ];
 
+  // Append the stats if not set
+  if (!configuration.stats) configuration.stats = {
+    modules: false,
+    source: true
+  };
+
   // Return the output
   return configuration;
 };

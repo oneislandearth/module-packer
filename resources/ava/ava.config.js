@@ -1,4 +1,8 @@
-{
+export default {
+  "verbose": true,
+  "require": [
+    "esm"
+  ],
   "files": [
     "tests/*.js",
     "tests/**/*.js",
