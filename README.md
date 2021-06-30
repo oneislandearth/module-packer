@@ -36,3 +36,8 @@ Package up and serve a library or module using `webpack serve`
 module-packer serve [webpack-cli-flags]
 ```
 
+Execute any tests defined in the libary or module using [ava](https://github.com/avajs/ava/blob/main/docs/03-assertions.md)
+
+```bash
+module-packer test [ava-flags]
+```
