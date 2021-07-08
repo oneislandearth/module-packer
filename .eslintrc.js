@@ -23,6 +23,7 @@ module.exports = {
     test: 'readonly'
   },
   rules: {
+    'vue/script-setup-uses-vars': 'off',
     'accessor-pairs': 'error',
     'array-bracket-newline': 'off',
     'array-bracket-spacing': 'off',
